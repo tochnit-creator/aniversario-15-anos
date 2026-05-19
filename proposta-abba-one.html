@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta de Contratação — Abba One</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-pale: #F5E6B8;
+    --dark: #0D0A06;
+    --dark2: #1A1408;
+    --dark3: #241E0F;
+    --warm: #2E2516;
+    --text: #F0E6C8;
+    --text-muted: #A89060;
+    --accent: #FF6B2B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    position: relative;
+    overflow: hidden;
+    padding: 3rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 80% at 10% 80%, rgba(255,107,43,0.08) 0%, transparent 60%),
+      var(--dark2);
+    z-index: 0;
+  }
+
+  /* Decorative circles */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.12);
+    top: -200px; right: -100px;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.08);
+    bottom: 100px; left: -80px;
+  }
+
+  .hero-header {
+    position: relative; z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .logo-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .doc-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 0 2rem;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .hero-title span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-top: 2rem;
+    max-width: 500px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .hero-footer {
+    position: relative; z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .hero-date-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .date-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .date-small {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .scroll-hint {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    writing-mode: vertical-lr;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .scroll-hint::after {
+    content: '';
+    display: block;
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: lineGrow 2s 1s ease both;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 0 3rem;
+    opacity: 0.3;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 5rem 3rem;
+    position: relative;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.2);
+  }
+
+  /* ─── EVENT DETAILS ─── */
+  .details-section {
+    background: var(--dark2);
+  }
+
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.12);
+  }
+
+  .detail-cell {
+    background: var(--dark2);
+    padding: 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .detail-cell:hover {
+    background: var(--dark3);
+  }
+  .detail-cell::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--gold);
+    transition: height 0.3s;
+  }
+  .detail-cell:hover::before { height: 100%; }
+
+  .detail-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    opacity: 0.8;
+  }
+  .detail-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .detail-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .detail-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+  }
+
+  /* ─── EQUIPMENT ─── */
+  .equip-section { background: var(--dark); }
+
+  .equip-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    margin-bottom: 3rem;
+  }
+  .equip-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text);
+  }
+  .equip-heading em { color: var(--gold); font-style: italic; }
+  .equip-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  .equip-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+
+  .equip-card {
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .equip-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+  .equip-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.08), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .equip-card:hover::after { opacity: 1; }
+
+  .equip-emoji { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+  .equip-name {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ─── TEAM ─── */
+  .team-section { background: var(--dark2); }
+
+  .team-stat {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5rem, 12vw, 10rem);
+    font-weight: 900;
+    color: rgba(201,168,76,0.12);
+    line-height: 1;
+    position: absolute;
+    top: 3rem; right: 3rem;
+    pointer-events: none;
+    letter-spacing: -0.05em;
+  }
+
+  .team-content {
+    max-width: 600px;
+    position: relative; z-index: 1;
+  }
+  .team-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  .team-heading em { color: var(--gold); font-style: italic; }
+  .team-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-bottom: 2rem;
+  }
+  .team-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .pill {
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.5rem 1.2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    border-radius: 100px;
+    transition: background 0.2s;
+  }
+  .pill:hover { background: rgba(201,168,76,0.1); }
+
+  /* ─── INVESTMENT ─── */
+  .invest-section { background: var(--dark); overflow: hidden; }
+
+  .invest-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .price-display {
+    position: relative;
+  }
+  .price-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .price-big {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .price-cents {
+    font-size: 2rem;
+    vertical-align: super;
+    color: var(--gold);
+  }
+  .price-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    line-height: 1.7;
+  }
+
+  .payment-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .payment-card {
+    position: relative;
+    padding: 1.8rem 2rem;
+    border: 1px solid rgba(201,168,76,0.2);
+    overflow: hidden;
+  }
+  .payment-card.highlight {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+  .payment-card .badge {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dark);
+    background: var(--gold);
+    padding: 0.3rem 0.8rem;
+  }
+  .card-step {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .card-amount {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  /* RIGHT SIDE INVEST */
+  .invest-right {}
+  .invest-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  .invest-heading em { color: var(--gold); font-style: italic; }
+  .invest-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-bottom: 2rem;
+  }
+
+  .included-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .included-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .included-list li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 0.6rem;
+    margin-top: 0.3rem;
+    flex-shrink: 0;
+  }
+  .included-list strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ─── FOOTER/CLOSING ─── */
+  .closing-section {
+    background: var(--dark2);
+    text-align: center;
+    padding: 6rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .closing-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201,168,76,0.07), transparent);
+  }
+  .closing-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+    position: relative; z-index: 1;
+  }
+  .closing-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    position: relative; z-index: 1;
+  }
+
+  .contact-row {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .contact-item {
+    text-align: center;
+  }
+  .contact-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .contact-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold-light);
+  }
+
+  .doc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 3rem;
+    border-top: 1px solid rgba(201,168,76,0.12);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes lineGrow {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+  }
+
+  /* ─── PRINT ─── */
+  @media print {
+    .hero { min-height: auto; }
+    .detail-cell:hover::before { display: none; }
+    * { animation: none !important; }
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    section, .hero { padding: 3rem 1.5rem; }
+    .divider { margin: 0 1.5rem; }
+    .equip-list { grid-template-columns: repeat(3, 1fr); }
+    .invest-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .equip-intro { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-footer { flex-direction: column; gap: 2rem; align-items: flex-start; }
+    .doc-footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .team-stat { font-size: 6rem; top: 1rem; right: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <header class="hero-header">
+    <div class="logo-mark">Abba One</div>
+    <div class="doc-label">
+      Proposta de Contratação<br>
+      Documento Nº AO-2027-01
+    </div>
+  </header>
+
+  <div class="hero-content">
+    <div class="eyebrow">Proposta Oficial</div>
+    <h1 class="hero-title">
+      Uma noite<br>
+      <span>inesquecível</span>
+    </h1>
+    <p class="hero-subtitle">
+      Louvores ao vivo para o aniversário de 15 anos — 
+      uma celebração com música, emoção e presença marcante.
+    </p>
+  </div>
+
+  <div class="hero-footer">
+    <div class="hero-date-block">
+      <div class="date-small">Data do Evento</div>
+      <div class="date-big">27.02</div>
+      <div class="date-small">Sábado · 2027 · 19h00</div>
+    </div>
+    <div class="scroll-hint">Role para ver</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ DETALHES DO EVENTO ═══ -->
+<section class="details-section">
+  <div class="section-label">Detalhes do Evento</div>
+
+  <div class="details-grid">
+    <div class="detail-cell">
+      <div class="detail-icon">🎂</div>
+      <div class="detail-label">Ocasião</div>
+      <div class="detail-value">Aniversário<br>15 Anos</div>
+    </div>
+    <div class="detail-cell">
+      <div class="detail-icon">📅</div>
+      <div class="detail-label">Data</div>
+      <div class="detail-value">27 de Fev</div>
+      <div class="detail-sub">Sábado · 2027</div>
+    </div>
+    <div class="detail-cell">
+      <div class="detail-icon">🕖</div>
+      <div class="detail-label">Horário</div>
+      <div class="detail-value">19h00</div>
+      <div class="detail-sub">Chegada às 18h para montagem</div>
+    </div>
+    <div class="detail-cell">
+      <div class="detail-icon">🎵</div>
+      <div class="detail-label">Formato</div>
+      <div class="detail-value">Louvores</div>
+      <div class="detail-sub">Ao vivo com banda completa</div>
+    </div>
+    <div class="detail-cell">
+      <div class="detail-icon">⏱</div>
+      <div class="detail-label">Duração</div>
+      <div class="detail-value">1 Hora</div>
+      <div class="detail-sub">Pausa a cada 30 min</div>
+    </div>
+    <div class="detail-cell">
+      <div class="detail-icon">🍽</div>
+      <div class="detail-label">Refeição</div>
+      <div class="detail-value">Fornecida</div>
+      <div class="detail-sub">Pelo local do evento</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ EQUIPAMENTOS ═══ -->
+<section class="equip-section">
+  <div class="section-label">Estrutura Técnica</div>
+
+  <div class="equip-intro">
+    <h2 class="equip-heading">
+      Levamos tudo<br>
+      que você<br>
+      <em>precisa</em>
+    </h2>
+    <p class="equip-desc">
+      Nossa equipe chega com estrutura completa por garantia, 
+      para que você não precise se preocupar com absolutamente nada. 
+      Cada detalhe técnico é nossa responsabilidade.
+    </p>
+  </div>
+
+  <div class="equip-list">
+    <div class="equip-card">
+      <span class="equip-emoji">🎸</span>
+      <div class="equip-name">Guitarra</div>
+    </div>
+    <div class="equip-card">
+      <span class="equip-emoji">🎸</span>
+      <div class="equip-name">Baixo</div>
+    </div>
+    <div class="equip-card">
+      <span class="equip-emoji">🥁</span>
+      <div class="equip-name">Bateria</div>
+    </div>
+    <div class="equip-card">
+      <span class="equip-emoji">🎤</span>
+      <div class="equip-name">Microfones</div>
+    </div>
+    <div class="equip-card">
+      <span class="equip-emoji">🔊</span>
+      <div class="equip-name">Caixa de Som</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ EQUIPE ═══ -->
+<section class="team-section">
+  <div class="section-label">Nossa Equipe</div>
+  <div class="team-stat">11</div>
+  <div class="team-content">
+    <h2 class="team-heading">
+      Uma equipe de<br>
+      <em>11 artistas</em><br>
+      dedicados ao seu dia
+    </h2>
+    <p class="team-text">
+      Músicos, vocais e suporte técnico — cada um dos nossos 11 profissionais 
+      estará presente para garantir uma apresentação impecável. 
+      Juntos, criamos momentos que ficam na memória.
+    </p>
+    <div class="team-pills">
+      <span class="pill">Vocalistas</span>
+      <span class="pill">Guitarrista</span>
+      <span class="pill">Baixista</span>
+      <span class="pill">Baterista</span>
+      <span class="pill">Suporte Técnico</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ INVESTIMENTO ═══ -->
+<section class="invest-section">
+  <div class="section-label">Investimento</div>
+
+  <div class="invest-layout">
+    <!-- LEFT: Preço e Pagamento -->
+    <div class="price-display">
+      <div class="price-label">Valor Total</div>
+      <div class="price-big">
+        R$&nbsp;6.500<span class="price-cents">,00</span>
+      </div>
+      <p class="price-note">
+        Parcelamento disponível via maquininha de cartão.<br>
+        Taxas da operadora aplicadas sobre o parcelamento.
+      </p>
+
+      <div class="payment-cards">
+        <div class="payment-card highlight">
+          <div class="badge">1ª Parcela</div>
+          <div class="card-step">Reserva da Data</div>
+          <div class="card-title">R$ 3.250,00</div>
+          <div class="card-amount">50% — No fechamento do contrato</div>
+        </div>
+        <div class="payment-card">
+          <div class="badge">2ª Parcela</div>
+          <div class="card-step">Confirmação Final</div>
+          <div class="card-title">R$ 3.250,00</div>
+          <div class="card-amount">50% — 3 dias antes do evento</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: O que está incluído -->
+    <div class="invest-right">
+      <h2 class="invest-heading">
+        Tudo incluído,<br>
+        <em>sem surpresas</em>
+      </h2>
+      <p class="invest-text">
+        Um único valor que cobre toda a experiência, do início ao fim. 
+        Nossa proposta é transparente para que você possa celebrar com tranquilidade.
+      </p>
+      <ul class="included-list">
+        <li><strong>Estrutura técnica completa</strong> — Bass, bateria, guitarra, microfones e caixa de som</li>
+        <li><strong>11 profissionais presentes</strong> — Banda, vocais e suporte</li>
+        <li><strong>1 hora de apresentação</strong> — Com pausas organizadas a cada 30 minutos</li>
+        <li><strong>Montagem e desmontagem</strong> — Chegamos 1h antes para tudo estar pronto</li>
+        <li><strong>Repertório de louvores</strong> — Selecionado e ensaiado especialmente para o evento</li>
+        <li><strong>Refeição no intervalo</strong> — Fornecida pelo local, sem custo adicional</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ CLOSING ═══ -->
+<section class="closing-section">
+  <div class="closing-bg"></div>
+  <div class="closing-heading">Vamos celebrar juntos?</div>
+  <p class="closing-sub">
+    Entre em contato para confirmar a data e fechar sua proposta
+  </p>
+  <div class="contact-row">
+    <div class="contact-item">
+      <div class="contact-label">Grupo</div>
+      <div class="contact-value">Abba One</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Proposta válida até</div>
+      <div class="contact-value">30 dias</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Documento</div>
+      <div class="contact-value">AO-2027-01</div>
+    </div>
+  </div>
+</section>
+
+<footer class="doc-footer">
+  <span>Abba One © 2027</span>
+  <span>Proposta de Contratação — Aniversário 15 Anos</span>
+  <span>Documento confidencial</span>
+</footer>
+
+</body>
+</html>
